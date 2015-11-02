@@ -2,17 +2,20 @@
 public class ORF {
 	int start;
 	int finish;
-	int count;
+	int length;
 	boolean isCDS = false;
-	double markov = 0.0;
+	boolean markov_isCDS = false;
+	double markov_score = 0;
 	
 	public ORF(int start, int finish) {
 		this.start = start;
 		this.finish = finish;
-		this.count = (finish - start + 1);
+		this.length = (finish - start + 1);
 	}
 	
 	public String toString() {
-		return "[" + start + "," + finish + "]";
+		//its start coordinate, length, log-base-2 Markov model score
+		// and a flag indicating whether this ORF was/was not among the "simple forward strand CDSs" in GenBan
+		return start + "\t" + length + "\t" + isCDS + "\t" + markov_score;
 	}
 }

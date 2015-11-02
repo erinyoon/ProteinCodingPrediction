@@ -20,9 +20,8 @@ import java.util.HashSet;
 public class ORFParser {
 	final static String input = "GCF_000091665.1_ASM9166v1_genomic.fna";
 	//final static String input = "dumb";
-	final static String output = "GCF_000091665.1_ASM9166v1_genomic.gbff";
-
-	public static int parse(HashSet<Integer> A, HashSet<Integer> T, HashSet<Integer> C, HashSet<Integer> G) {
+	
+	public static int parse(HashSet<Integer> A, HashSet<Integer> C, HashSet<Integer> G, HashSet<Integer> T) {
 		BufferedReader br = null;
 		int index = 0;
 		int newline = 0;
@@ -66,9 +65,9 @@ public class ORFParser {
 		return index;
 	}
 	
-	public static void findORF(HashSet<Integer> A, HashSet<Integer> T, HashSet<Integer> C, HashSet<Integer> G,
-								ArrayList<ORF> mod0, ArrayList<ORF> mod1, ArrayList<ORF> mod2, ArrayList<ORF> orfs) {
-		int size = parse(A, T, C, G);
+	public static void findORF(HashSet<Integer> A, HashSet<Integer> C, HashSet<Integer> G, HashSet<Integer> T,
+								ArrayList<ORF> mod1, ArrayList<ORF> mod2, ArrayList<ORF> mod0, ArrayList<ORF> orfs) {
+		int size = parse(A, C, G, T);
 		for (int i = 1; i <= 3; i++) {
 			// mod 1, 2, 0
 			// stop codon (TAA, TAG, or TGA).
@@ -122,7 +121,7 @@ public class ORFParser {
 
 	public static void shorterORFs(ArrayList<ORF> arr, ArrayList<ORF> res, int max) {
 		for (int i = 0; i < arr.size(); i++) {
-			if (arr.get(i).count < max) {
+			if (arr.get(i).length < max) {
 				res.add(arr.get(i));
 			}
 		}
@@ -130,7 +129,7 @@ public class ORFParser {
 
 	public static void longerORFs(ArrayList<ORF> arr, ArrayList<ORF> res, int min) {
 		for (int i = 0; i < arr.size(); i++) {
-			if (arr.get(i).count > min) {
+			if (arr.get(i).length > min) {
 				res.add(arr.get(i));
 			}
 		}
