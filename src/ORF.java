@@ -1,4 +1,3 @@
-
 public class ORF {
 	int start;
 	int finish;
@@ -12,10 +11,8 @@ public class ORF {
 		this.finish = finish;
 		this.length = (finish - start + 1);
 	}
-	
+
 	public String toString() {
-		//its start coordinate, length, log-base-2 Markov model score
-		// and a flag indicating whether this ORF was/was not among the "simple forward strand CDSs" in GenBan
 		return start + "\t" + length + "\t" + isCDS + "\t" + markov_score;
 	}
 }
